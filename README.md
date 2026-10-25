@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# PostCSS Initial
+[![CSS Standard Status][css-img]][css] [![Build Status][ci-img]][ci] [![NPM Module][npm-img]][npm] [![David DM][david-img]][david]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img align="right" width="135" height="95"
+     title="Philosopher’s stone, logo of PostCSS"
+     src="http://postcss.github.io/postcss/logo-leftp.png">
 
-## Available Scripts
+[PostCSS] plugin to fallback `initial` keyword. Very useful in combination with
+[postcss-autoreset][reset].
 
-In the project directory, you can run:
+[PostCSS]: https://github.com/postcss/postcss
+[css-img]: https://jonathantneal.github.io/css-db/badge/css-cascade-all-shorthand.svg
+[css]:     https://jonathantneal.github.io/css-db/#css-cascade-all-shorthand
+[ci-img]:  https://travis-ci.org/maximkoretskiy/postcss-initial.svg
+[ci]:      https://travis-ci.org/maximkoretskiy/postcss-initial
+[npm-img]: https://badge.fury.io/js/postcss-initial.svg
+[npm]:     https://www.npmjs.com/package/postcss-initial
+[david-img]:   https://david-dm.org/maximkoretskiy/postcss-initial.svg
+[david]:   https://david-dm.org/maximkoretskiy/postcss-initial
+[reset]:   https://github.com/maximkoretskiy/postcss-autoreset
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```css
+a {
+  animation: initial;
+  background: initial;
+  white-space: initial;
+}
+p {
+  background: url(/img1.png),
+              url(/img2.png);
+  background-repeat: initial no-repeat
+}
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```css
+a {
+  animation: none 0s ease 0s 1 normal none running;
+  animation: initial;
+  background: transparent none repeat 0 0 / auto auto padding-box border-box scroll;
+  background: initial;
+  white-space: normal;
+  white-space: initial;
+}
+p {
+  background: url(/img1.png),
+              url(/img2.png);
+  background-repeat: repeat no-repeat
+}
+```
 
-### `npm test`
+[!['Can I use' table](https://caniuse.bitsofco.de/image/css-initial-value.png)](https://caniuse.com/#feat=css-initial-value)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Killer feature!**
 
-### `npm run build`
+Universal reset from future css!
+```css
+a {
+  all: initial;
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```css
+a {
+  animation: none 0s ease 0s 1 normal none running;
+  backface-visibility: visible;
+  background: transparent none repeat 0 0 / auto auto padding-box border-box scroll;
+  border: medium none currentColor;
+  border-collapse: separate;
+  border-image: none;
+  border-radius: 0;
+  border-spacing: 0;
+  bottom: auto;
+  box-shadow: none;
+  box-sizing: content-box;
+  caption-side: top;
+  clear: none;
+  clip: auto;
+  color: #000;
+  columns: auto;
+  column-count: auto;
+  column-fill: balance;
+  column-gap: normal;
+  column-rule: medium none currentColor;
+  column-span: 1;
+  column-width: auto;
+  content: normal;
+  counter-increment: none;
+  counter-reset: none;
+  cursor: auto;
+  direction: ltr;
+  display: inline;
+  empty-cells: show;
+  float: none;
+  font-family: serif;
+  font-size: medium;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: normal;
+  height: auto;
+  hyphens: none;
+  left: auto;
+  letter-spacing: normal;
+  list-style: disc outside none;
+  margin: 0;
+  max-height: none;
+  max-width: none;
+  min-height: 0;
+  min-width: 0;
+  opacity: 1;
+  orphans: 2;
+  outline: medium none invert;
+  overflow: visible;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding: 0;
+  page-break-after: auto;
+  page-break-before: auto;
+  page-break-inside: auto;
+  perspective: none;
+  perspective-origin: 50% 50%;
+  position: static;
+  right: auto;
+  tab-size: 8;
+  table-layout: auto;
+  text-align: left;
+  text-align-last: auto;
+  text-decoration: none;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  top: auto;
+  transform: none;
+  transform-origin: 50% 50% 0;
+  transform-style: flat;
+  transition: none 0s ease 0s;
+  unicode-bidi: normal;
+  vertical-align: baseline;
+  visibility: visible;
+  white-space: normal;
+  widows: 2;
+  width: auto;
+  word-spacing: normal;
+  z-index: auto;
+  all: initial;
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Options
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### reset
 
-### `npm run eject`
+Takes `string`.
+Describes what subset of rules should be unsetted with `all` property (to reduce code weight).
+Possible subsets: `all`, `inherited`.
+Default value: `'all'`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### replace
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Takes `boolean`.
+Replace the `initial` with the fallback instead of adding it.
+Default value: `false`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+postcss([ require('postcss-initial')({
+  reset: 'inherited' // reset only inherited rules
+}) ])
+```
 
-## Learn More
+See [PostCSS] docs for examples for your environment.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## [Changelog](./CHANGELOG.md)

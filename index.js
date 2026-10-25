@@ -1,17 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+var makeFallbackFunction = require('./lib/rules-fabric');
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+module.exports = function postcssInitial(opts) {
+  opts = opts || {};
+  opts.reset = opts.reset || 'all';
+  opts.replace = opts.replace || false;
+  var getFallback = makeFallbackFunction(opts.reset === 'inherited');
+  var getPropPrevTo = function (prop, decl) {
+    var foundPrev = false;
+    decl.parent.walkDecls(function (child) {
+      if (child.prop === decl.prop && child.value !== decl.value) {
+        foundPrev = true;
+      }
+    });
+    return foundPrev;
+  };
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  return {
+    postcssPlugin: 'postcss-initial',
+    Declaration:   function (decl) {
+      if (!/\binitial\b/.test(decl.value)) {
+        return;
+      }
+      var fallBackRules = getFallback(decl.prop, decl.value);
+      if (fallBackRules.length === 0) return;
+      fallBackRules.forEach(function (rule) {
+        if ( !getPropPrevTo(decl.prop, decl) ) {
+          decl.cloneBefore(rule);
+        }
+      });
+      if (opts.replace === true) {
+        decl.remove();
+      }
+    }
+  };
+};
+
+module.exports.postcss = true;
