@@ -1,19 +1,19 @@
-# @babel/generator
+# @babel/helper-globals
 
-> Turns an AST into code.
+> A collection of JavaScript globals for Babel internal usage
 
-See our website [@babel/generator](https://babeljs.io/docs/babel-generator) for more information or the [issues](https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20generator%22+is%3Aopen) associated with this package.
+See our website [@babel/helper-globals](https://babeljs.io/docs/babel-helper-globals) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save-dev @babel/generator
+npm install --save @babel/helper-globals
 ```
 
 or using yarn:
 
 ```sh
-yarn add @babel/generator --dev
+yarn add @babel/helper-globals
 ```
