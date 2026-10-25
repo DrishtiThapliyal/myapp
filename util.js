@@ -3,69 +3,30 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.canSkipRegexpu = canSkipRegexpu;
-exports.generateRegexpuOptions = generateRegexpuOptions;
-exports.transformFlags = transformFlags;
-var _features = require("./features.js");
-function generateRegexpuOptions(pattern, toTransform) {
-  const feat = name => {
-    return (0, _features.hasFeature)(toTransform, _features.FEATURES[name]) ? "transform" : false;
-  };
-  const featDuplicateNamedGroups = () => {
-    if (!feat("duplicateNamedCaptureGroups")) return false;
-    const regex = /\(\?<([^>]+)(>|$)/g;
-    const seen = new Set();
-    for (let match; (match = regex.exec(pattern)) && match[2]; seen.add(match[1])) {
-      if (seen.has(match[1])) return "transform";
-    }
+exports.isPathSimpleArrayWithLength = isPathSimpleArrayWithLength;
+exports.shouldTransform = shouldTransform;
+var _helperSkipTransparentExpressionWrappers = require("@babel/helper-skip-transparent-expression-wrappers");
+function isPathSimpleArrayWithLength(path, N) {
+  var _path$node$extra;
+  if (!path.isArrayExpression()) {
     return false;
-  };
-  return {
-    unicodeFlag: feat("unicodeFlag"),
-    unicodeSetsFlag: feat("unicodeSetsFlag"),
-    dotAllFlag: feat("dotAllFlag"),
-    unicodePropertyEscapes: feat("unicodePropertyEscape"),
-    namedGroups: feat("namedCaptureGroups") || featDuplicateNamedGroups(),
-    onNamedGroup: () => {},
-    modifiers: feat("modifiers")
-  };
-}
-function canSkipRegexpu(node, options) {
-  const {
-    flags,
-    pattern
-  } = node;
-  if (flags.includes("v")) {
-    if (options.unicodeSetsFlag === "transform") return false;
   }
-  if (flags.includes("u")) {
-    if (options.unicodeFlag === "transform") return false;
-    if (options.unicodePropertyEscapes === "transform" && /\\p\{/i.test(pattern)) {
-      return false;
+  const elementPaths = path.get("elements");
+  return elementPaths.length === N && elementPaths.every(elementPath => elementPath.node && !elementPath.isSpreadElement()) && !((_path$node$extra = path.node.extra) != null && _path$node$extra.trailingComma);
+}
+function shouldTransform(path) {
+  const elementPaths = path.get("elements");
+  const elementPathsLength = elementPaths.length;
+  if (elementPaths[elementPathsLength - 1].isRestElement()) {
+    const {
+      parentPath
+    } = path;
+    const rhsPath = parentPath.isVariableDeclarator() ? parentPath.get("init") : parentPath.isAssignmentExpression() ? parentPath.get("right") : null;
+    if (rhsPath != null && rhsPath.node && isPathSimpleArrayWithLength((0, _helperSkipTransparentExpressionWrappers.skipTransparentExprWrappers)(rhsPath), elementPathsLength)) {
+      return rhsPath;
     }
   }
-  if (flags.includes("s")) {
-    if (options.dotAllFlag === "transform") return false;
-  }
-  if (options.namedGroups === "transform" && /\(\?<(?![=!])/.test(pattern)) {
-    return false;
-  }
-  if (options.modifiers === "transform" && /\(\?[\w-]+:/.test(pattern)) {
-    return false;
-  }
-  return true;
-}
-function transformFlags(regexpuOptions, flags) {
-  if (regexpuOptions.unicodeSetsFlag === "transform") {
-    flags = flags.replace("v", "u");
-  }
-  if (regexpuOptions.unicodeFlag === "transform") {
-    flags = flags.replace("u", "");
-  }
-  if (regexpuOptions.dotAllFlag === "transform") {
-    flags = flags.replace("s", "");
-  }
-  return flags;
+  return false;
 }
 
 //# sourceMappingURL=util.js.map
