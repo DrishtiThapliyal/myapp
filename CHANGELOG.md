@@ -1,77 +1,191 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
 
-### [4.0.1](https://github.com/maximkoretskiy/postcss-initial/compare/v4.0.0...v4.0.1) (2021-04-14)
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.0.0](https://github.com/maximkoretskiy/postcss-initial/compare/v3.0.2...v4.0.0) (2020-09-29)
+## [4.4.4] - 2025-07-22
 
-## [4.0.0] - 2020-09-29
+### Changed
+- Switch from yarn to npm for package management
+- Switch from eslint to biome for code formatting and linting
+- Reformat codebase to comply with biome recommendations
+- Switch from webpack to rollup for bundling
 
-- Update deps
-- Migrate to PostCSS v8 Thanks to @goto-bus-stop and @Semigradsky
-- Fix initial false positive. Thanks to @goto-bus-stop
+### Fixed
+- Fix module exports to ensure proper compatibility with bundlers
+- Add validation check to prevent future export issues
 
-## [3.0.3] - 2020-07-14
+## [4.4.3] - 2025-05-15
 
-- Update deps
+### Security
+- Fix polynomial regular expression vulnerability on uncontrolled data
+- Refactor code to enable GitHub security static analysis
 
-## [3.0.2](https://github.com/maximkoretskiy/postcss-initial/compare/v3.0.1...v3.0.2) (2019-10-31)
+### Performance
+- Improve parsing performance with minor optimizations
+- Replace regex patterns with string search (indexOf-based) for better performance
 
-## [3.0.1] - 2019-08-09
+### Added
+- Add new utility functions with comprehensive unit tests
+- Add improved formatting for CSS Grid template areas (#283 by @jogibear9988)
 
-- Fix lodash.template vulnerability. See https://github.com/lodash/lodash/pull/4336
+### Fixed
+- Fix TypeScript error with ConstructorParameters in Parcel bundler (#444)
 
-## [3.0.0] - 2018-08-16
+## [4.4.2] - 2025-02-12
 
-- Upgrade PostCSS to 7.0.2. It breaks node@4 support. Thanks to @ansballard for contribution
+### Fixed
+- Fix regular expression for parsing quoted values in parentheses
 
-## [2.0.0] - 2016-05-09
+## [4.4.0] - 2024-06-05
 
-- Add yarn
-- Update dependcies. Thanks to @Semigradsky
+### Added
+- Add support for CSS `@starting-style` at-rule (#319)
 
-## [1.5.3] - 2016-11-30
+## [4.3.3] - 2024-01-24
 
-- Add `.eslintrc` to `.npmignore` Thanks to @wtgtybhertgeghgtwtg for pr [#20](https://github.com/maximkoretskiy/postcss-initial/pull/20)
+### Changed
+- Update package export configuration (#271)
 
-## [1.5.2] - 2016-07-20
+## [4.3.2] - 2023-11-28
 
-Fix rules duplication in case when user added own fallback for rule.
-See [#18](https://github.com/maximkoretskiy/postcss-initial/issues/18).
-Thanks to @ChaosExAnima for suggestion and PR.
+### Security
+- Fix ReDoS vulnerability with crafted CSS strings - CVE-2023-48631
 
-## [1.5.1] - 2016-04-09
+### Fixed
+- Fix parsing issues with `:is()` and nested `:nth-child()` selectors (#211)
 
-Added support of multiple initial values in property. Thanks to @johnbender for issue and contribution.
+## [4.3.1] - 2023-03-14
 
-## [1.5.0] - 2016-03-09
+### Security
+- Fix ReDoS vulnerability with crafted CSS strings - CVE-2023-26364
 
-- Fix some props with inherit values to more specific values. Thnx @dzhiriki for issue.
-- Update deps
+## [4.3.0] - 2023-03-07
 
-## [1.4.1] - 2016-02-05
+### Changed
+- Update build toolchain and dependencies
+- Update package exports configuration and file structure
 
-- Remove gulp from workflow, using npm-scrips only
-- Update lodash.template@4
-- Fix browser compatibility issues(font, orphans, widows, text-decoration). Thnx to @kinday for issue.
+## [4.2.0] - 2023-02-21
 
-## [1.4] - 2015-11-08
+### Added
+- Add support for CSS `@container` at-rule
+- Add support for CSS `@layer` at-rule
 
-- Added `replace` option. Thanks to @sylvainbaronnet
+## [4.1.0] - 2023-01-25
 
-## [1.3] - 2015-08-27
+### Added
+- Add support for ES Modules (ESM)
 
-Rename project to make it more universal (plugin name is **postcss-initial**)
+## [4.0.2] - 2023-01-12
 
-## [1.2] - 2015-08-26
+### Fixed
+- Fix `@import` parsing when URL contains semicolons (#71)
+- Fix regression in selector parsing for attribute selectors (#77)
 
-Rename project to fit standards (plugin name is **postcss-all-property**)
+## [4.0.1] - 2022-08-03
 
-## [1.1.0] - 2015-08-25
+### Fixed
+- Fix `globalThis` configuration for webpack to enable UMD module usage in Node.js environments
 
-Add reset: inherited option
+## [4.0.0] - 2022-06-09
 
-## [1.0.1] - 2015-08-24
+### Changed
+- Fork from original css library to Adobe's `@adobe/css-tools` package
+- Convert codebase from JavaScript to TypeScript
+- Improve parsing performance by approximately 25%
+- Update all dependencies to latest versions
+- Remove source map support
 
-Proof of concept. Plugin still works =)(plugin name is **postcss-all-unset**)
+---
+
+## Legacy Versions (Pre-Adobe Fork)
+
+## [3.0.0] - 2020-07-01
+
+### Changed
+- Bump major version due to major dependency updates and Node.js version requirement changes
+
+## [2.2.1] - 2015-06-17
+
+### Fixed
+- Fix parsing of escaped quotes in quoted strings
+
+## [2.2.0] - 2015-02-18
+
+### Added
+- Add `parsingErrors` property to list errors when parsing with `silent: true`
+- Accept EOL characters and all whitespace characters in at-rules such as `@media`
+
+## [2.1.0] - 2014-08-05
+
+### Added
+- Add `inputSourcemaps` option to disable input source map processing
+- Add `sourcemap: 'generator'` option to return the `SourceMapGenerator` object
+- Use `inherits` package for inheritance (fixes browser compatibility issues)
+
+### Changed
+- Change error message format and add `.reason` property to error objects
+
+## [2.0.0] - 2014-06-18
+
+### Added
+- Add non-enumerable parent reference to each AST node
+- Add support for `@custom-media`, `@host`, and `@font-face` at-rules
+- Allow commas inside selector functions
+- Allow empty property values
+- Add `node.position.content` property
+- Integrate css-parse and css-stringify libraries
+- Apply original source maps from source files
+
+### Changed
+- Change default `options.position` value to `true`
+- Remove comments from properties and values
+
+### Removed
+- Drop Component(1) support
+
+### Fixed
+- Fix assertion errors when selectors are missing
+
+## [1.6.1] - 2014-01-02
+
+### Fixed
+- Fix component.json configuration
+
+## [1.6.0] - 2013-12-21
+
+### Changed
+- Update dependencies
+
+## [1.5.0] - 2013-12-03
+
+### Changed
+- Update dependencies
+
+## [1.1.0] - 2013-04-04
+
+### Changed
+- Update dependencies
+
+## [1.0.7] - 2012-11-21
+
+### Fixed
+- Fix component.json configuration
+
+## [1.0.4] - 2012-11-15
+
+### Changed
+- Update css-stringify dependency
+
+## [1.0.3] - 2012-09-01
+
+### Added
+- Add Component support
+
+## [0.0.1] - 2010-01-03
+
+### Added
+- Initial release
