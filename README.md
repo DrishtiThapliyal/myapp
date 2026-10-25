@@ -1,19 +1,19 @@
-# @babel/plugin-proposal-class-properties
+# @babel/plugin-syntax-json-strings
 
-> This plugin transforms static class properties as well as properties declared with the property initializer syntax
+> Allow parsing of the U+2028 LINE SEPARATOR and U+2029 PARAGRAPH SEPARATOR in JS strings
 
-See our website [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties) for more information.
+See our website [@babel/plugin-syntax-json-strings](https://babeljs.io/docs/en/next/babel-plugin-syntax-json-strings.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save-dev @babel/plugin-proposal-class-properties
+npm install --save-dev @babel/plugin-syntax-json-strings
 ```
 
 or using yarn:
 
 ```sh
-yarn add @babel/plugin-proposal-class-properties --dev
+yarn add @babel/plugin-syntax-json-strings --dev
 ```

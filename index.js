@@ -7,21 +7,16 @@ exports.default = void 0;
 
 var _helperPluginUtils = require("@babel/helper-plugin-utils");
 
-var _helperCreateClassFeaturesPlugin = require("@babel/helper-create-class-features-plugin");
-
-var _default = (0, _helperPluginUtils.declare)((api, options) => {
+var _default = (0, _helperPluginUtils.declare)(api => {
   api.assertVersion(7);
-  return (0, _helperCreateClassFeaturesPlugin.createClassFeaturePlugin)({
-    name: "proposal-class-properties",
-    api,
-    feature: _helperCreateClassFeaturesPlugin.FEATURES.fields,
-    loose: options.loose,
+  return {
+    name: "syntax-json-strings",
 
     manipulateOptions(opts, parserOpts) {
-      parserOpts.plugins.push("classProperties", "classPrivateProperties");
+      parserOpts.plugins.push("jsonStrings");
     }
 
-  });
+  };
 });
 
 exports.default = _default;
