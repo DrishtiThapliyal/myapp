@@ -1,19 +1,19 @@
-# @babel/plugin-syntax-json-strings
+# @babel/plugin-syntax-logical-assignment-operators
 
-> Allow parsing of the U+2028 LINE SEPARATOR and U+2029 PARAGRAPH SEPARATOR in JS strings
+> Allow parsing of the logical assignment operators
 
-See our website [@babel/plugin-syntax-json-strings](https://babeljs.io/docs/en/next/babel-plugin-syntax-json-strings.html) for more information.
+See our website [@babel/plugin-syntax-logical-assignment-operators](https://babeljs.io/docs/en/next/babel-plugin-syntax-logical-assignment-operators.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save-dev @babel/plugin-syntax-json-strings
+npm install --save-dev @babel/plugin-syntax-logical-assignment-operators
 ```
 
 or using yarn:
 
 ```sh
-yarn add @babel/plugin-syntax-json-strings --dev
+yarn add @babel/plugin-syntax-logical-assignment-operators --dev
 ```
